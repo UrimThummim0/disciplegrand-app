@@ -1,57 +1,121 @@
-1. Research and Planning
-Objective: Define the app’s purpose and key functionalities (uploading, downloading, file types supported, etc.)
-Target Audience: Identify who will use the app and any specific needs they may have.
-Features:
-File Upload: Allow users to upload files from their device.
-File Download: Enable users to download files from a server or cloud storage.
-File Management: Organize and categorize uploaded/downloaded files (folders, search, etc.).
-Security: Ensure secure file transfer (e.g., encryption, user authentication).
+# Projet : Application éducative interactive (Grands et Disciples)
 
-2. Design Phase
-Wireframe Creation: Create a visual representation of the app’s UI/UX.
-User Flow: Design the path a user takes when interacting with the app.
-App UI/UX:
-Design intuitive and clean interfaces for file selection, uploading, and downloading.
-Integrate progress indicators for uploads and downloads.
-Ensure a responsive design suitable for various device sizes.
-Prototyping: Develop an interactive prototype to test the flow and get user feedback.
+## Présentation
 
-3. Tech Stack Selection
-Mobile Platform: Choose between Android (Kotlin/Java) or cross-platform (e.g., Flutter, React Native).
-Backend:
-Use a server to manage files (e.g., AWS S3, Google Cloud Storage).
-Set up a backend (Node.js, Firebase, Django) to handle file storage, authentication, and API management.
-APIs:
-File upload and download APIs (RESTful or GraphQL).
-Authentication (OAuth, Firebase Authentication).
-Database: Set up a database (SQL/NoSQL) to store file metadata and user information.
+Ce projet est une initiative de la communauté **Grands et Disciples**, réunissant des passionnés de mathématiques et d'entraide.  
+Nous voulons créer une **application web (ou mobile)** dynamique, intuitive et accessible, dédiée à la **consultation interactive de sujets et corrections**, principalement pour le niveau **Terminale**, avec une ouverture vers le **niveau supérieur**.
 
-4. Development Phase
-Frontend Development:
-Implement file upload and download UI elements.
-Handle file selection and transfer processes.
-Backend Development:
-Set up APIs to manage file uploads and downloads.
-Implement user authentication and session management.
-Integrate with cloud storage for file handling.
-Security: Ensure secure file transfer, storage, and user authentication (encryption, token-based access).
-Testing:
-Unit testing for individual components.
-Integration testing to ensure file handling works correctly with the backend.
-User acceptance testing to ensure the app works smoothly for end users.
+---
 
-5. Deployment
-App Store Submission: Submit the app to Google Play or Apple App Store.
-Cloud Storage Integration: Ensure that the app’s backend integrates correctly with cloud services (e.g., AWS S3, Firebase Storage).
+## Objectifs
 
-6. Post-Launch & Maintenance
-Monitor Performance: Track app performance and file transfer speeds.
-Bug Fixes: Address any user-reported issues or bugs.
-User Feedback: Gather user feedback to refine and improve the app.
-Updates: Release updates for new features or improvements based on user needs.
+- Offrir une interface fluide, moderne et interactive pour étudier les sujets corrigés.
+- Tous les sujets et corrections sont affichés dynamiquement en **LaTeX**, comme sur un site professionnel (pas de PDF statique).
+- Permettre à l'utilisateur de **télécharger en PDF** un sujet/correction s'il le souhaite.
+- Faciliter la contribution de nouveaux contenus par les membres du staff via une **application d’administration** simple et assistée par **OCR/IA**.
 
-7. Future Enhancements (Optional)
-Offline Functionality: Allow users to upload/download files when they are offline and sync when the internet is available.
-File Preview: Allow users to preview certain file types (images, PDFs, etc.) before downloading.
-File Sharing: Enable users to share files with others via a link or directly through the app.
+---
 
+## Fonctionnalités principales – **Application Étudiante**
+
+### 1. Accueil
+- Vue globale des dernières publications.
+- Suggestions par matière ou thème.
+
+### 2. Navigation intuitive
+- Par matière (Maths, Physique, etc.).
+- Par chapitre ou compétence.
+- Par difficulté (facile, moyen, difficile).
+
+### 3. Consultation des sujets
+- Sujet écrit **en LaTeX** (pas un simple PDF).
+- Correction affichée dynamiquement avec rendu mathématique propre.
+- Mode nuit/jour, zoom, mise en page fluide.
+- Bouton **"Exporter en PDF"** si besoin.
+
+### 4. Recherche et filtrage
+- Mots-clés (intégrales, complexes, bac 2023, etc.).
+- Filtres : année, type d'exercice, niveau.
+
+### 5. Interaction
+- Notation de la correction.
+- Signaler une erreur.
+- Bouton "je n’ai pas compris" (proposition d’aide ou explication alternative).
+
+---
+
+## Fonctionnalités – **Application Admin + OCR/IA**
+
+### 1. Authentification admin
+
+### 2. Ajout d’un sujet/correction
+- **Upload d’image claire** du sujet ou de la correction (format JPG/PNG/PDF).
+- L’application **analyse l’image avec OCR/IA** pour générer une version **LaTeX** automatiquement.
+- L’admin **relit et valide ou corrige** avant publication.
+- L'interface admin affiche :
+  - Image originale à gauche.
+  - Version LaTeX générée à droite (modifiable).
+
+### 3. Classement par matière, chapitre, difficulté
+- Ajout de tags.
+- Possibilité de versionner les corrections.
+
+### 4. Outils OCR/IA envisagés
+- **Tesseract OCR** ou **Mathpix API** pour convertir image → texte/LaTeX.
+- Moteur d’apprentissage (fine-tuning possible si open-source).
+
+---
+
+## Architecture technique
+
+### Frontend
+- **React.js** ou **Next.js** (web) / **React Native + Expo** (mobile)
+- Utilisation de **KaTeX** ou **MathJax** pour le rendu LaTeX.
+- PDF export : `html2pdf.js` ou `react-pdf`.
+
+### Backend
+- **Node.js + Express** ou **FastAPI**
+- Stockage dans **Supabase**, **Firebase** ou **MongoDB**
+- API OCR intégrée dans le backend (ou API externe comme Mathpix)
+
+### Administration
+- Tableau de bord React ou Next.js
+- Éditeur LaTeX live + image source
+- Interface de validation
+
+---
+
+## Tâches préliminaires
+
+1. **Cadrage**
+   - Définir les matières prioritaires.
+   - Recenser les sujets/corrections déjà disponibles.
+
+2. **Choix technos**
+   - Choisir stack frontend/backend + OCR.
+   - Étudier les API LaTeX/OCR disponibles.
+
+3. **Maquettes UI**
+   - Application élève (navigation fluide, affichage LaTeX).
+   - Interface admin (upload + validation OCR).
+
+4. **Base de données**
+   - Modélisation : Sujets, Corrections, Matières, Chapitres, etc.
+
+5. **Prototype OCR/IA**
+   - Test d’un flux image > OCR > LaTeX > affichage.
+
+---
+
+## À venir (Bonus)
+
+- Forum intégré ou système d'entraide.
+- Exportation groupée (ex : tous les sujets d'intégrales).
+- Notifications pour nouveaux sujets/corrections.
+- Dark mode et accessibilité.
+
+---
+
+## Équipe & Crédits
+
+Projet porté par les **membres de Grands et Disciples**, pour démocratiser l’accès à un contenu de qualité, interactif et localement utile à tous les élèves de Terminale et plus.
